@@ -1,7 +1,19 @@
-body { 
-    background-color: red;
+.game {
+  width: 470px;
+  height: 470px;
+  background-color: black;
+  padding: 7.5px;
+  margin-left: auto;
+  margin-right: auto;
 
-    h1 {
-        color: green;
-    }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .tile {
+    background-color: white;
+    min-width: 102.5px;
+    min-height: 102.5px;
+    margin: 7.5px;
+  }
 }
