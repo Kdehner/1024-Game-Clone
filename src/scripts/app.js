@@ -1,4 +1,6 @@
 import { Tile } from './tile.controller';
+import { Input } from './input.controller';
+
 
 const tiles = getTiles();
 
@@ -9,15 +11,14 @@ setFirstTile();
 updateTiles();
 
 
-window.addEventListener('keydown', e => {
-  const keyPressed = e.keyCode;
-  const move = moves.find(move => move.keys.includes(keyPressed));
+async function game() {
+  const input = new Input();
 
-  if (move) {
-    moveTiles(move);
+  while(true) {
+    const move = await input.movement();
+    console.log(move);
   }
-});
-
+}
 
 function setFirstTile() {
   const newTile = randomTile();
@@ -56,31 +57,6 @@ function buildGame() {
   for (const tile of tiles) {
     tile.createTile(game);
   }
-
 }
 
-function movement() {
-  const moves = [
-    {
-      move: 'up',
-      keys: [38, 87],
-      calculation: [+1, 0],
-    },
-    {
-      move: 'down',
-      keys: [40, 83],
-      calculation: [-1, 0],
-    },
-    {
-      move: 'left',
-      keys: [37, 65],
-      calculation: [0, -1],
-    },
-    {
-      move: 'right',
-      keys: [38, 68],
-      calculation: [0, +1],
-    },
-  ];
-}
 
