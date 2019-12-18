@@ -1,11 +1,12 @@
 import { Input } from './input.controller';
 import { Block } from './block.controller';
+import { Tile } from './tile.controller';
 
 export class Game {
 
   constructor() {
     this.blocks = this.getBlocks();
-    this.gameLoop();
+    this.gameLoop(this.blocks);
   }
 
   getBlocks() {
@@ -18,40 +19,29 @@ export class Game {
     return blocks;
   }
 
-  async gameLoop() {
+  async gameLoop(blocks) {
+    let newGame = true;
     const input = new Input();
 
     while(true) {
+
+      if(newGame) {
+        this.generateFirstTile(blocks);
+        newGame = false;
+      }
       const move = await input.movement();
       
     }
   }
 
-  // setFirstTile(tiles) {
-  //   const random = this.randomTile();
-  //   const newTile = tiles[newTile];
-  //   newTile.setValue = 1;
-  //   this.updateActiveTiles(newTile);
-  // }
-
-  // randomTile() {
-  //   return Math.floor(Math.random() * Math.floor(16));
-  // }
-
-  // buildGame(blocks) {
-  //   const game = document.querySelector('.game');
-
-  //   for (const block of blocks) {
-  //     block.createBlock(game);
-  //   }
-  // }
-
-  // updateTiles() {
-  //   for(const tile of this.tiles) {
-  //     tile.updateDisplay();
-  //   }
-  // }
-
-
-
+  generateFirstTile(blocks) {
+    const random = this.randomBlock();
+    const block = blocks[random];
+    const tile = new Tile(1, '#eee4da');
+    block.setTile = tile;
+  }
+  
+  randomBlock() {
+    return Math.floor(Math.random() * Math.floor(16));
+  }
 }
