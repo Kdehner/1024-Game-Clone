@@ -1,41 +1,21 @@
 export class Tile {
 
-  constructor(id, location) {
-    this.id = id;
-    this.location = location;
-    this.value = 0;
-    this.tileElement = this.tileDomElement();
-    this.valueElement = this.valueDomElement();
+  constructor(value, color, block) {
+    this.value = value;
+    this.color = color;
+    this.block = block;
+    this.element = this.createElement();
   }
 
-  tileDomElement() {
-    const div = document.createElement('div');
-    div.classList.add('tile');
-    return div;
-  }
-
-  valueDomElement() {
+  createElement() {
     const div = document.createElement('div');
     div.classList.add('value');
+    div.style.backgroundColor = this.color;
+    div.innerHTML = String(this.value);
     return div;
   }
 
-  injectDom(game) {
-    this.tileElement.appendChild(this.valueElement);
-    game.appendChild(this.tileElement);
-  }
-
-  createTile(game) {
-    this.injectDom(game);
-  }
-
-  set setValue(value) {
-    this.value += value;
-  }
-
-  updateDisplay() {
-    if (this.value != 0) {
-      this.valueElement.innerHTML = String(this.value);
-    }
+  get getDomElement() {
+    return this.element;
   }
 }
