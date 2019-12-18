@@ -1,7 +1,7 @@
 export class Block {
 
-  constructor(id, game) {
-    this.id = id;
+  constructor(coordinates, game) {
+    this.coordinates = coordinates;
     this.element = this.createElement();
     this.tile;
     this.injectDom(game);
@@ -9,7 +9,6 @@ export class Block {
 
   createElement() {
     const div = document.createElement('div');
-    div.dataset.id = this.id;
     div.classList.add('block');
     return div;
   }

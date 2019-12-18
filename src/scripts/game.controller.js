@@ -12,9 +12,15 @@ export class Game {
   getBlocks() {
     const game = document.querySelector('.game');
     const blocks = [];
+    const coordinates = [
+      [1,1], [1,2], [1,3], [1,4],
+      [2,1], [2,2], [2,3], [2,4],
+      [3,1], [3,2], [3,3], [3,4],
+      [4,1], [4,2], [4,3], [4,4]
+    ]
     for (let i = 0; i < 16; i++) {
-      const id = i + 1;
-      blocks.push(new Block(id, game));
+      const cords = { 'x':coordinates[i][0], 'y':coordinates[i][1] };
+      blocks.push(new Block(cords, game));
     }
     return blocks;
   }
@@ -40,7 +46,7 @@ export class Game {
     const tile = new Tile(1, '#eee4da');
     block.setTile = tile;
   }
-  
+
   randomBlock() {
     return Math.floor(Math.random() * Math.floor(16));
   }
