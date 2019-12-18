@@ -10,16 +10,16 @@
   flex-wrap: wrap;
   justify-content: center;
 
-  .tile {
+  .block {
     background-color: white;
     min-width: 102.5px;
     min-height: 102.5px;
     margin: 7.5px;
 
-    .value {
-      font-size: 4rem;
-      text-align: center;
-      line-height: 102.5px;
-    }
+    // .value {
+    //   font-size: 4rem;
+    //   text-align: center;
+    //   line-height: 102.5px;
+    // }
   }
 }
