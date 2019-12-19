@@ -20,34 +20,54 @@ export class Game {
     ]
     for (let i = 0; i < 16; i++) {
       const cords = { 'x':coordinates[i][0], 'y':coordinates[i][1] };
-      blocks.push(new Block(cords, game));
+      const id = i + 1;
+      blocks.push(new Block(id, cords, game));
     }
     return blocks;
   }
 
   async gameLoop(blocks) {
-    let newGame = true;
     const input = new Input();
 
     while(true) {
-
-      if(newGame) {
-        this.generateFirstTile(blocks);
-        newGame = false;
-      }
+      this.tileGenerator(blocks);
       const move = await input.movement();
-      
     }
   }
 
-  generateFirstTile(blocks) {
-    const random = this.randomBlock();
+  tileGenerator(blocks) {
+    const populated = [];
+    // get populated blocks
+    for (let block of blocks) {
+      let id = block.getTile;
+      if (id) {
+        populated.push(id - 1);
+      } else {
+        continue;
+      }
+    }
+    if(populated.length === 16) {
+      return;
+    }
+    // select new random block excluding populated
+    const random = this.randomBlock(populated);
+    // generate new tile in random block
     const block = blocks[random];
     const tile = new Tile(1, '#eee4da');
     block.setTile = tile;
   }
 
-  randomBlock() {
-    return Math.floor(Math.random() * Math.floor(16));
+  randomBlock(populated) {
+    let random;
+    while(true) {
+      const min = Math.ceil(1);
+      const max = Math.floor(16);
+      random = (Math.floor(Math.random() * (max - min + 1)) + min) - 1;
+      if(populated.includes(random)) {
+        continue;
+      } else {
+        return random;
+      }
+    }
   }
 }
