@@ -1,6 +1,7 @@
 export class Block {
 
-  constructor(coordinates, game) {
+  constructor(id, coordinates, game) {
+    this.id = id;
     this.coordinates = coordinates;
     this.element = this.createElement();
     this.tile;
@@ -31,6 +32,13 @@ export class Block {
   appendChild (tile) {
     const tileElement = tile.getDomElement;
     this.element.appendChild(tileElement);
+  }
+
+  get getTile() {
+    if (this.tile != null) {
+      return this.id;
+    }
+    return;
   }
 
 }
