@@ -37,7 +37,6 @@ export class Game {
 
   tileGenerator(blocks) {
     const populated = [];
-    // get populated blocks
     for (let block of blocks) {
       let id = block.getTile;
       if (id) {
@@ -49,9 +48,7 @@ export class Game {
     if(populated.length === 16) {
       return;
     }
-    // select new random block excluding populated
     const random = this.randomBlock(populated);
-    // generate new tile in random block
     const block = blocks[random];
     const tile = new Tile(1, '#eee4da');
     block.setTile = tile;
