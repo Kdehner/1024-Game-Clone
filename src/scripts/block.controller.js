@@ -1,8 +1,8 @@
 export class Block {
 
-  constructor(id, coordinates, game) {
+  constructor(id, index, game) {
     this.id = id;
-    this.coordinates = coordinates;
+    this.index = index;
     this.element = this.createElement();
     this.tile;
     this.injectDom(game);
@@ -39,5 +39,13 @@ export class Block {
       return this.id;
     }
     return;
+  }
+
+  get getId() {
+    return this.id
+  }
+
+  get getIndex() {
+    return this.index
   }
 }
