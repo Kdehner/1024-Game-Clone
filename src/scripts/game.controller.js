@@ -1,6 +1,7 @@
 import { Input } from './input.controller';
 import { Block } from './block.controller';
 import { Tile } from './tile.controller';
+import { getPopulated, randomBlock } from './utils/block.util';
 
 export class Game {
 
@@ -32,39 +33,20 @@ export class Game {
     while(true) {
       this.tileGenerator(blocks);
       const move = await input.movement();
+      processMoves(move, blocks);
     }
   }
 
   tileGenerator(blocks) {
-    const populated = [];
-    for (let block of blocks) {
-      let id = block.getTile;
-      if (id) {
-        populated.push(id - 1);
-      } else {
-        continue;
-      }
-    }
+    const populated = getPopulated(blocks);
+
     if(populated.length === 16) {
       return;
     }
-    const random = this.randomBlock(populated);
+    const random = randomBlock(populated);
     const block = blocks[random];
     const tile = new Tile(1, '#eee4da');
     block.setTile = tile;
   }
 
-  randomBlock(populated) {
-    let random;
-    while(true) {
-      const min = Math.ceil(1);
-      const max = Math.floor(16);
-      random = (Math.floor(Math.random() * (max - min + 1)) + min) - 1;
-      if(populated.includes(random)) {
-        continue;
-      } else {
-        return random;
-      }
-    }
-  }
 }
