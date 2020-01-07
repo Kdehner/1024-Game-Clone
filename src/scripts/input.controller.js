@@ -5,12 +5,12 @@ export class Input {
       {
         move: 'up',
         keys: [38, 87],
-        calculation: [+1, 0],
+        calculation: [-1, 0],
       },
       {
         move: 'down',
         keys: [40, 83],
-        calculation: [-1, 0],
+        calculation: [1, 0],
       },
       {
         move: 'left',
@@ -20,7 +20,7 @@ export class Input {
       {
         move: 'right',
         keys: [39, 68],
-        calculation: [0, +1],
+        calculation: [0, 1],
       },
     ];
   }

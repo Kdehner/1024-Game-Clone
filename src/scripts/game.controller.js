@@ -33,7 +33,7 @@ export class Game {
     while(true) {
       this.tileGenerator(blocks);
       const move = await input.movement();
-      // processMoves(move, blocks);
+      this.processMoves(move, blocks);
     }
   }
 
@@ -49,4 +49,59 @@ export class Game {
     block.setTile = tile;
   }
 
+  processMoves(move, blocks) {
+    // Get all blocks with tiles
+    const populatedBlocks = []
+    
+    for (let row of blocks) {
+      for (let block of row) {
+        if(block.getTile) {
+          populatedBlocks.push(block);
+        }
+      }
+    }
+
+    console.log(populatedBlocks);
+    // Check for block collision
+    for(let block of populatedBlocks) {
+      this.checkCollision(move, block, blocks);
+    }
+    // Process move logic
+    // Process Dom changes.
+  }
+
+  checkCollision(move, block, blocks) {
+    const moveDirection = move.move;
+    const [moveY, moveX] = move.calculation;
+    const [indexY, indexX] = block.getIndex;
+    let nextBlock;
+
+    if(moveDirection === 'up') {
+      if(block.indexY <= 0) {
+        return;
+      }
+    }
+    if(moveDirection === 'down') {
+      if(block.indexY >= 3) {
+        return;
+      }
+    }
+    if(moveDirection === 'left') {
+      if(block.indexX <= 0) {
+        return;
+      }
+    }
+    if(moveDirection === 'right') {
+      if(block.indexY >= 0) {
+        return;
+      }
+    }
+
+    const [nextY, nextX] = [(indexY + moveY), (indexX + moveX)];
+    nextBlock = blocks[nextY][nextX];
+
+    if(nextBlock.getTile) {
+      // Process collision;
+    }
+  }
 }
