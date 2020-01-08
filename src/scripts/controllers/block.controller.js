@@ -1,10 +1,10 @@
 export class Block {
 
-  constructor(id, index, game) {
+  constructor(id, game) {
     this.id = id;
-    this.index = index;
+    this.neighbors = {};
     this.element = this.createElement();
-    this.tile;
+    this.tile = null;
     this.injectDom(game);
   }
 
@@ -36,16 +36,12 @@ export class Block {
 
   get getTile() {
     if (this.tile != null) {
-      return this.id;
+      return true;
     }
-    return;
+    return false;
   }
 
   get getId() {
     return this.id
-  }
-
-  get getIndex() {
-    return this.index
   }
 }
