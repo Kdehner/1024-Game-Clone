@@ -25,6 +25,10 @@ export function getBlocks() {
     blocks.push(new Block(id, game))
   }
 
+  const outOfBounds = {
+    left: [0, 4, 8, 12],
+    right: [5, 9, 13, 17]
+  }
   for (let block of blocks) {
     const id = block.getId;
 
@@ -40,18 +44,18 @@ export function getBlocks() {
       block.neighbors.down = blocks[(id + 4) - 1];
     }
 
-    if ((id - 1) <= 0) {
+    if (outOfBounds.left.includes((id - 1))) {
       block.neighbors.left = null;
     } else {
       block.neighbors.left = blocks[(id - 1) - 1];
     }
     
-    if ((id + 1) >= 17) {
+    if (outOfBounds.right.includes((id + 1))) {
       block.neighbors.right = null;
     } else {
       block.neighbors.right = blocks[(id + 1) - 1];
     }
   }
-
+  console.log(blocks);
   return blocks;
 }

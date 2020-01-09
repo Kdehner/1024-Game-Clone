@@ -14,15 +14,20 @@ export class Block {
     return div;
   }
 
-  set setTile(tile) { 
+  setTile(tile) { 
     this.tile = tile;
     this.appendChild(tile);
   }
 
-  removeChild() {
+  clearTile() {
     const child = this.tile.getDomElement;
     this.element.removeChild(child);
     this.tile = null;
+  }
+
+  updateTile(tile) {
+    this.clearTile();
+    this.setTile(tile);
   }
 
   injectDom(game) {
@@ -43,5 +48,13 @@ export class Block {
 
   get getId() {
     return this.id
+  }
+
+  get getTileValue() {
+    return this.tile.value;
+  }
+
+  nextBlock(direction) {
+    return this.neighbors[direction];
   }
 }
